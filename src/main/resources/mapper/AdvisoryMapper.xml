@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zty.marketing.dao.AdvisoryDao">
+    <!--增加咨询-->
+    <insert id="add_advisory" parameterType="java.util.Map">
+        insert into advisory (`name`,`phone`,`project_name`) values (#{name},#{phone},#{project_name})
+    </insert>
+
+    <!--分页模糊查询咨询信息-->
+    <select id="find_advisory" parameterType="java.util.Map" resultType="com.zty.marketing.entity.Advisory">
+        <bind name="page" value="pageSize*(pageNo-1)"></bind>
+        select * from advisory
+        <where>
+            <if test="project_name!=null and project_name!=''">
+                content like concat("%",#{content},"%")
+            </if>
+        </where>
+        limit #{page},#{pageSize}
+    </select>
+
+    <!--统计总数-->
+    <select id="total" parameterType="java.util.Map" resultType="long">
+        select count(*) from advisory
+        <where>
+            <if test="project_name!=null and project_name!=''">
+                content like concat("%",#{content},"%")
+            </if>
+        </where>
+    </select>
+</mapper>
