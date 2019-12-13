@@ -8,21 +8,23 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 * name    咨询者姓名
 * phone   咨询者电话
 * project_name   咨询项目名称
+* createtime   上传时间
 * */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Advisory {
     private int id;
-    private String name,phone,project_name;
+    private String name,phone,project_name,createtime;
 
     public Advisory(){
         super();
     }
 
-    public Advisory(int id, String name, String phone, String project_name) {
+    public Advisory(int id, String name, String phone, String project_name, String createtime) {
         this.id = id;
         this.name = name;
         this.phone = phone;
         this.project_name = project_name;
+        this.createtime = createtime;
     }
 
     public int getId() {
@@ -57,6 +59,14 @@ public class Advisory {
         this.project_name = project_name;
     }
 
+    public String getCreatetime() {
+        return createtime;
+    }
+
+    public void setCreatetime(String createtime) {
+        this.createtime = createtime;
+    }
+
     @Override
     public String toString() {
         return "Advisory{" +
@@ -64,6 +74,7 @@ public class Advisory {
                 ", name='" + name + '\'' +
                 ", phone='" + phone + '\'' +
                 ", project_name='" + project_name + '\'' +
+                ", createtime='" + createtime + '\'' +
                 '}';
     }
 }

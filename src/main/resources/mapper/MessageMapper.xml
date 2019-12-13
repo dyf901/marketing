@@ -5,7 +5,7 @@
 <mapper namespace="com.zty.marketing.dao.MessageDao">
     <!--增加留言信息-->
     <insert id="add_message" parameterType="java.util.Map">
-        insert into message (`name`,`phone`,`email`,`content`) values (#{name},#{phone},#{email},#{content})
+        insert into message (`name`,`phone`,`email`,`content`,`createtime`) values (#{name},#{phone},#{email},#{content},now())
     </insert>
 
     <!--分页模糊查询留言信息-->
@@ -17,6 +17,7 @@
                 content like concat("%",#{content},"%")
             </if>
         </where>
+        order by id DESC
         limit #{page},#{pageSize}
     </select>
 

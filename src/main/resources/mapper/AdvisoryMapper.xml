@@ -5,7 +5,7 @@
 <mapper namespace="com.zty.marketing.dao.AdvisoryDao">
     <!--增加咨询-->
     <insert id="add_advisory" parameterType="java.util.Map">
-        insert into advisory (`name`,`phone`,`project_name`) values (#{name},#{phone},#{project_name})
+        insert into advisory (`name`,`phone`,`project_name`,`createtime`) values (#{name},#{phone},#{project_name},now())
     </insert>
 
     <!--分页模糊查询咨询信息-->
@@ -17,6 +17,7 @@
                 content like concat("%",#{content},"%")
             </if>
         </where>
+        order by id DESC
         limit #{page},#{pageSize}
     </select>
 
