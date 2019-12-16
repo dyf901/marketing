@@ -19,7 +19,7 @@ public class UserController {
     @Autowired
     private UserDao userService;
 
-    @ApiOperation(value = "登录",notes = "")
+    @ApiOperation(value = "登录",notes = "测试数据:{\"username\":\"admin\", \"password\":\"123456\"}")
     @PostMapping("login")
     public Msg login(@RequestBody Map map){
         Msg msg = new Msg();

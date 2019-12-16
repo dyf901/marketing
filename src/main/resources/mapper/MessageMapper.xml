@@ -5,7 +5,7 @@
 <mapper namespace="com.zty.marketing.dao.MessageDao">
     <!--增加留言信息-->
     <insert id="add_message" parameterType="java.util.Map">
-        insert into message (`name`,`phone`,`email`,`content`,`createtime`) values (#{name},#{phone},#{email},#{content},now())
+        insert into message (`name`,`phone`,`email`,`content`,`createtime`,`variety`) values (#{name},#{phone},#{email},#{content},now(),#{variety})
     </insert>
 
     <!--分页模糊查询留言信息-->
@@ -13,8 +13,11 @@
         <bind name="page" value="pageSize*(pageNo-1)"></bind>
         select * from message
         <where>
+            <if test="variety!=null and variety!=''">
+                and variety=#{variety}
+            </if>
             <if test="content!=null and content!=''">
-                content like concat("%",#{content},"%")
+               and content like concat("%",#{content},"%")
             </if>
         </where>
         order by id DESC
@@ -25,8 +28,11 @@
     <select id="total" parameterType="java.util.Map" resultType="long">
         select count(*) from message
         <where>
+            <if test="variety!=null and variety!=''">
+                and variety=#{variety}
+            </if>
             <if test="content!=null and content!=''">
-                content like concat("%",#{content},"%")
+                and content like concat("%",#{content},"%")
             </if>
         </where>
     </select>

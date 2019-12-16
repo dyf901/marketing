@@ -10,23 +10,25 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 * email   留言人邮箱
 * content   留言内容
 * createtime   上传时间
+* variety   种类
 * */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Message {
     private int id;
-    private String name,phone,email,content,createtime;
+    private String name,phone,email,content,createtime,variety;
 
     public Message(){
         super();
     }
 
-    public Message(int id, String name, String phone, String email, String content, String createtime) {
+    public Message(int id, String name, String phone, String email, String content, String createtime, String variety) {
         this.id = id;
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.content = content;
         this.createtime = createtime;
+        this.variety = variety;
     }
 
     public int getId() {
@@ -77,6 +79,14 @@ public class Message {
         this.createtime = createtime;
     }
 
+    public String getVariety() {
+        return variety;
+    }
+
+    public void setVariety(String variety) {
+        this.variety = variety;
+    }
+
     @Override
     public String toString() {
         return "Message{" +
@@ -86,6 +96,7 @@ public class Message {
                 ", email='" + email + '\'' +
                 ", content='" + content + '\'' +
                 ", createtime='" + createtime + '\'' +
+                ", variety='" + variety + '\'' +
                 '}';
     }
 }

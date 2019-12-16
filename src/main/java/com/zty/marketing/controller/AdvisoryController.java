@@ -24,6 +24,7 @@ public class AdvisoryController {
             "\"project_name\":\"苏州S1线\"}")
     @PostMapping("add_advisory")
     public boolean add_advisory(@RequestBody Map map){
+        System.out.println(map);
         return advisoryService.add_advisory(map)==1;
     }
 

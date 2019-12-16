@@ -5,7 +5,7 @@
 <mapper namespace="com.zty.marketing.dao.AdvisoryDao">
     <!--增加咨询-->
     <insert id="add_advisory" parameterType="java.util.Map">
-        insert into advisory (`name`,`phone`,`project_name`,`createtime`) values (#{name},#{phone},#{project_name},now())
+        insert into advisory (`name`,`phone`,`project_name`,`createtime`,`variety`) values (#{name},#{phone},#{project_name},now(),#{variety})
     </insert>
 
     <!--分页模糊查询咨询信息-->
@@ -14,7 +14,10 @@
         select * from advisory
         <where>
             <if test="project_name!=null and project_name!=''">
-                content like concat("%",#{content},"%")
+                project_name like concat("%",#{project_name},"%")
+            </if>
+            <if test="variety!=null and variety!=''">
+                and variety=#{variety}
             </if>
         </where>
         order by id DESC
@@ -26,7 +29,10 @@
         select count(*) from advisory
         <where>
             <if test="project_name!=null and project_name!=''">
-                content like concat("%",#{content},"%")
+                project_name like concat("%",#{project_name},"%")
+            </if>
+            <if test="variety!=null and variety!=''">
+                and variety=#{variety}
             </if>
         </where>
     </select>
